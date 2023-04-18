@@ -102,8 +102,9 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-         
-            <Message sx={{ fontSize: "25px" }} />
+            <IconButton onClick={()=>navigate('/messenger')}>
+             <Message sx={{ fontSize: "25px" }} />
+            </IconButton>
           <IconButton>
             <Badge badgeContent={2} color='primary'>
                 <Notifications sx={{ fontSize: "25px" , color:'black'}}   />
