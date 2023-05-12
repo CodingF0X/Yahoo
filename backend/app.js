@@ -9,14 +9,15 @@ const path = require ("path");
 const { fileURLToPath } = require("url");
 const cors = require('cors')
 
-
 //-- ROUTERS --//
 const authRouter = require('./Routes/AuthRouter')
 const userRouter = require('./Routes/UserRouter')
+const adminRouter = require('./Routes/AdminRouter')
 const postRouter = require('./Routes/PostRouter')
 const searchRouter = require('./Routes/SearchRoutes')
 const requireAuth = require('./Middleware/requireAuth')
 const { createPost } = require('./Controllers/postController')
+const User = require('./Models/UserModel')
 
 app.use(cors())
 app.use(express.json())
@@ -35,7 +36,10 @@ app.listen(process.env.PORT, DB,()=>{
    })
 
 
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+
+
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -48,11 +52,24 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage });
 
+
+// const seedMocky =
+
+// User.insertMany(seedMocky, function(err, docs) {
+//   if (err) {
+//     console.error(err);
+//   } else {
+//     console.log(`${seedMocky.length} users seeded successfully`);
+//   }
+//   mongoose.disconnect();
+// });
+
 app.post('/api/posts', requireAuth, upload.single("picture"), createPost);
 
 
 app.use('/api/auth',authRouter)
 app.use('/api/user',userRouter)
+app.use('/api/admin',adminRouter)
 app.use('/api/posts',postRouter)
 app.use(`/api/filter/`,searchRouter)
    
