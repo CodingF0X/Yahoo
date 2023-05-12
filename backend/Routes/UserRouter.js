@@ -3,6 +3,7 @@ const router = express.Router()
 const userController = require('../Controllers/userController')
 const requireAuth = require('../Middleware/requireAuth')
 
+
 //-- GET ALL USERS --//
 router.get('/',userController.getAllUsers)
 //-- GET A USER --//
@@ -11,10 +12,8 @@ router.get('/:id',userController.getSingleUser)
 router.put('/:id',requireAuth,userController.updateUser)
 //-- DELETE A USER --//
 router.delete('/:id',requireAuth,userController.deleteUser)
-//-- FOLLOW A USER --//
-
-//-- UNFOLLOW A USER --//
-
+//-- TOGGLE MODERATOR --//
+// router.put('/:id_admin', userController.toggleModerator)
 
 //-- FRIENDS LIST --//
 router.get("/:id/friends",userController.getUserFriends);
