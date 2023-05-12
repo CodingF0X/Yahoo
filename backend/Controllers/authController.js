@@ -23,8 +23,11 @@ exports.createUser = async (req,res)=>{
             password : hashedPWD,
             profilePicture,
             coverImage,
-            
-            userName: `${firstName}_${lastName}${uniq}` 
+            userName: `${firstName}_${lastName}${uniq}`,
+            isAdmin:false,
+            isModerator:false,
+            location,
+            occupation
 
         })
 
