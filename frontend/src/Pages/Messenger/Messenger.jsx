@@ -1,6 +1,7 @@
 import { Box } from '@mui/material'
 import ChatBox from '../../Components/Messenger/ChatBox'
-import Conversations from '../../Components/Messenger/Conversations'
+import Conversations from '../../Components/Messenger/Conversations/Conversations'
+import RightPane from '../../Components/Messenger/RightPane/RightPane'
 
 
 const Messenger = () => {
@@ -16,10 +17,11 @@ const Messenger = () => {
 
   return (
   
-    <Box display={'flex'} flexDirection='row' m={2}>
-      <Box ml={1} flexBasis='80%'><ChatBox sender = 'alex' /></Box>
+    <Box display={'flex'} flexDirection='row' m={2} maxHeight='100%' sx={{overflowY:'clip'}}>
+      <Box flexBasis='10%'><Conversations/></Box>
+      <Box ml={1} flexBasis='50%'><ChatBox sender = 'alex' /></Box>
+      <Box flexBasis='30%'><RightPane/></Box>
       
-      <Box><Conversations/></Box>
     </Box>
     
   )

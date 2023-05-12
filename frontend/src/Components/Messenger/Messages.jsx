@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const Messages = ({ sender, message }) => {
   return (
-    <div>
+    <Box>
       <Box>
         <Box display={"flex"} alignItems={"center"} mt={2} ml={2} gap={1}>
           <Avatar
@@ -14,7 +14,7 @@ const Messages = ({ sender, message }) => {
 
           <Typography
             sx={{
-              backgroundColor: "violet",
+              backgroundColor: "#F5F5F5	",
               borderRadius: "15px",
               padding: "10px",
               maxWidth: "500px",
@@ -30,10 +30,11 @@ const Messages = ({ sender, message }) => {
         <Box display={"flex"} alignItems={"center"} mt={2} ml={2} gap={1}>
           <Typography
             sx={{
-              backgroundColor: "violet",
+              backgroundColor: '#4d79ff',
               borderRadius: "15px",
               padding: "10px",
               maxWidth: "500px",
+              color:'white'
             }}
           >
             {" "}
@@ -47,7 +48,7 @@ const Messages = ({ sender, message }) => {
         </Box>
         <Typography mr={7}>1hr ago</Typography>
       </Box>
-    </div>
+    </Box>
   );
 };
 
