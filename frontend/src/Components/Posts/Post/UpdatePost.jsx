@@ -1,5 +1,5 @@
-import { Send } from '@mui/icons-material';
-import { Box,useTheme, TextField,IconButton, InputBase, Divider, Card } from '@mui/material'
+import { Done, Send } from '@mui/icons-material';
+import { Box,useTheme, TextField,IconButton, InputBase, Divider, Card, Typography } from '@mui/material'
 import React from 'react'
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -56,8 +56,12 @@ const UpdatePost = ({editPost,isEditing,setIsEditing,ref}) => {
       />
       </FlexBetween>
       <Divider/>
-      <IconButton sx={{marginInlineStart:'400px'}} type='submit' >
+      {/* <IconButton sx={{marginInlineStart:'400px'}} type='submit' >
         <Send />
+      </IconButton> */}
+      <IconButton display={'flex'} gap={1} color={'green'} sx={{marginInlineStart:'350px', color:'green'}}>
+      <Typography variant='body1' >Confirm</Typography>
+      <Done color='green'/>
       </IconButton>
       
     </Box>
