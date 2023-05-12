@@ -6,7 +6,9 @@ import {
   DarkMode,
   LightMode,
   Notifications,
-  LoginOutlined
+  LoginOutlined,
+  AdminPanelSettings,
+  Person
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate,useLocation, Link } from "react-router-dom";
@@ -133,6 +135,15 @@ const Navbar = () => {
               <MenuItem value={user && name}>
                 <Typography>{user && name}</Typography>
               </MenuItem>
+
+              {user?.isAdmin && 
+              <MenuItem onClick={()=>navigate('dashboard')}>
+                <AdminPanelSettings></AdminPanelSettings>
+                &nbsp; 
+                Dashboard
+              </MenuItem>
+              }
+
               {!user && 
               <MenuItem  onClick={()=>navigate('/signin')}>
                SignIn &nbsp; 
