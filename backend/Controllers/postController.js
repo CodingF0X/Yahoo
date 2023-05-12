@@ -3,6 +3,17 @@ const Comment = require("../Models/CommentModel");
 const Post = require("../Models/PostModel");
 const User = require("../Models/UserModel");
 
+
+//-- GET ALL POSTS --//
+exports.getAllPosts = async (req, res) => {
+    try {
+      const posts = await Post.find({});
+      res.status(200).json(posts);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  };
+
 //-- CREATE POST --//
 exports.createPost = async (req,res)=>{
     const { name,description,image,likes,comments } = req.body
