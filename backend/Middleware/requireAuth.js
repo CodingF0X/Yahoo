@@ -5,7 +5,7 @@ const { decode }  = require('jsonwebtoken')
 
 const requireAuth =  async (req,res,next)=>{
     const {authorization} = req.headers
-    console.log(req.headers)
+    // console.log(req.headers)
     if(!authorization){
         return res.status(400).json({error:'authorization token required'})
     }
