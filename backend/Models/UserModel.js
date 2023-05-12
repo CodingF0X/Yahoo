@@ -41,6 +41,10 @@ const userSchema = new schema({
         type: Array,
         default: [],
     },
+    age:{
+        type:Number,
+        required:false
+    },
 
     // followers:{
     //     type:Array,
@@ -50,10 +54,22 @@ const userSchema = new schema({
     //     type:Array,
     //     default:[]
     // },
-    // isAdmin:{
-    //     type:Boolean,
-    //     default:false
-    // }
+    isAdmin:{
+        type:Boolean,
+        default:false
+    },
+    isModerator:{
+        type:Boolean,
+        default:false
+    },
+    location:{
+        type:String,
+        default:''
+    },
+    occupation:{
+        type:String,
+        default:''
+    }
 },{timestamps:true})
 
 userSchema.index({firstName:'text',lastName:'text',userName:'text'})
