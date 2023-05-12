@@ -7,6 +7,7 @@ import Name_Email from "./Name_Email"
 import Password from "./Password"
 import Rightbar from "./Rightbar"
 import Sidebar from "./Sidebar"
+import Facts from "./Facts"
 
 
 
@@ -19,6 +20,8 @@ const EditProfile = () => {
     const main = location.pathname===`/profile/${userId}/settings/edit`
     const editingEmail = location.pathname.includes('/name_email')
     const editingPassword = location.pathname.includes('/password')
+    const editingFacts = location.pathname.includes('/facts')
+
   return (
     <Box display='flex' flexDirection='row'> 
 
@@ -34,6 +37,7 @@ const EditProfile = () => {
            
           {editingPassword && <Password /> }
         
+          {editingFacts && <Facts />}
         </Box>
         
         <Box><Divider orientation='vertical'  sx={{ml:'50px',color:'black'}} /></Box>
