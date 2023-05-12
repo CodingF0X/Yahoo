@@ -4,6 +4,8 @@ const postController = require('../Controllers/postController')
 const requireAuth = require('../Middleware/requireAuth')
 
 
+//-- GET ALL POSTS --//
+router.get('/', requireAuth,postController.getAllPosts)
 //-- CREATE POST --//
 router.post('/',requireAuth, postController.createPost)
 
