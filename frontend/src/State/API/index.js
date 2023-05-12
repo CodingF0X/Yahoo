@@ -57,8 +57,15 @@ export const fetchFriendsList = (id)=>API.get(`/api/user/${id}/friends`)
 export const patchFriends = (id,friendId)=> API.patch(`/api/user/${id}/${friendId}`)
 export const fetchSingleUser = (id)=> API.get(`/api/user/${id}`)
 export const updateUserDetails = (id,formData)=> API.put(`/api/user/${id}`,formData)
+export const updateUserPWD = (id,newPassword)=> API.put(`/api/user/${id}`,{newPassword})
 export const updateprofilePicture = (id,profilePicture)=> API.put(`/api/user/${id}`,{profilePicture})
 export const updateCoverImage = (id,coverImage)=> API.put(`/api/user/${id}`,{coverImage})
+
+//-- ADMIN METHODS --//
+export const fetchAllUsersAdmin = ()=>API.get(`/api/admin`)
+export const deleteUser = (id)=>API.delete(`/api/admin/${id}`)
+export const toggleModerator = (id,isModerator)=>API.put(`/api/admin/${id}`,{isModerator})
+export const getAllPostsAdmin = ()=> API.get(`api/posts`)
 
 //-- SEARCH METHODS --//
 export const searchFilter = (searchTerm)=> API.post(`/api/filter/search`,{searchTerm})
