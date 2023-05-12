@@ -14,6 +14,7 @@ import EditProfile from "./Pages/SettingsPage/EditProfile";
 import { Token_Google_auth, user, customToken } from "./State/Tokens/token";
 import Register from "./Pages/SignUp/Register";
 import Messenger from "./Pages/Messenger/Messenger";
+import Dashboard from "./Pages/Admin/Dashboard";
 
 function App() {
   const mode = useSelector((state) => state.darkMode.mode);
@@ -54,12 +55,19 @@ function App() {
               path="/profile/:userId/settings/edit/password"
               element={user ? <EditProfile /> : <Navigate to="/" />}
             />
-
+            <Route
+              path="/profile/:userId/settings/edit/facts"
+              element={user ? <EditProfile /> : <Navigate to="/" />}
+            />
             <Route
               path="messenger"
               element={user ? <Messenger /> : <Navigate to="/signin" />}
             />
-
+            //-- ADMIN --//
+            <Route
+              path="/dashboard"
+              element={user?.result?.isAdmin && <Dashboard />}
+            />
             <Route
               path="/signin"
               element={!user ? <SignIn /> : <Navigate to="/home" />}
