@@ -5,6 +5,7 @@ import { userSignInReducer, usersReducer } from './Reducers/UserReducer'
 import { modeReducer } from './Reducers/ModeReducer'
 import { postsReducer } from './Reducers/PostReducer'
 import { FilterSearch } from './Reducers/SearchReducer'
+import { adminDReducer } from './Reducers/AdminReducer'
 
 
 const reducers = combineReducers({
@@ -12,6 +13,7 @@ const reducers = combineReducers({
     auth : userSignInReducer,
     posts : postsReducer,
     users: usersReducer,
+    admin: adminDReducer,
     searchResult: FilterSearch
 })
 
