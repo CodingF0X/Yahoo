@@ -26,9 +26,16 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const {friends} = useSelector(state => state.users);
+  const {friends,allUsers} = useSelector(state => state.users);
   const auth = useSelector(state=>state.auth)
   const authId = auth && auth.result._id
+
+  let me =null
+  allUsers.find(user=>{
+    if(user._id === authId){
+      me=user
+    }
+  })
 
   const [user, setUser] = useState(null)
   const name = user && `${user.user.firstName} ${user.user.lastName}`
@@ -44,7 +51,6 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
 
   const handleNavigate = ()=>{
     navigate(`/profile/${userId}`)
-    //navigate(0)
   }
 
   // const handleSettings = ()=>{
@@ -99,25 +105,25 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
           </Box>
         </FlexBetween>
         
-        {isOwnProfile ? 
+        {isOwnProfile && 
         
         <IconButton href={`/profile/${userId}/settings/edit`}>
         <ManageAccountsOutlined />
         </IconButton> 
-        :
-        (
+        
+        } {!me ?
           <IconButton
           onClick={()=>patchFriend()}
           sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
           >
           {   isFriend ? (
-            <PersonAddOutlined sx={{ color: primaryDark }} />
-          ) : (
             <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          ) : (
+            <PersonAddOutlined sx={{ color: primaryDark }} />
           )}
         </IconButton>
-        )
-       }
+        : null
+        }
         
       </FlexBetween>
 
@@ -127,30 +133,12 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
       <Box p="1rem 0">
         <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
           <LocationOnOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>'Location :'</Typography>
+          <Typography color={medium}>{user.user.location}</Typography>
         </Box>
         <Box display="flex" alignItems="center" gap="1rem">
           <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
-          <Typography color={medium}>'Occupation'</Typography>
+          <Typography color={medium}>{user.user.occupation}</Typography>
         </Box>
-      </Box>
-
-      <Divider />
-
-      {/* THIRD ROW */}
-      <Box p="1rem 0">
-        <FlexBetween mb="0.5rem">
-          <Typography color={medium}>Who's viewed your profile</Typography>
-          <Typography color={main} fontWeight="500">
-            'Viewed profile'
-          </Typography>
-        </FlexBetween>
-        <FlexBetween>
-          <Typography color={medium}>Impressions of your post</Typography>
-          <Typography color={main} fontWeight="500">
-            'impressions'
-          </Typography>
-        </FlexBetween>
       </Box>
 
       <Divider />
@@ -168,7 +156,7 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
               <Typography color={main} fontWeight="500">
                 Twitter
               </Typography>
-              <Typography color={medium}>Social Network</Typography>
+              <Typography color={medium}>Me@twitter</Typography>
             </Box>
           </FlexBetween>
           <EditOutlined sx={{ color: main }} />
@@ -181,7 +169,7 @@ const UserWidget = ({ userId ,isOwnProfile,changePic}) => {
               <Typography color={main} fontWeight="500">
                 Linkedin
               </Typography>
-              <Typography color={medium}>Network Platform</Typography>
+              <Typography color={medium}>Me@LinkedIn</Typography>
             </Box>
           </FlexBetween>
           <EditOutlined sx={{ color: main }} />
