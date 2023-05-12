@@ -31,7 +31,7 @@ const Name_Email = ({setIsClicked}) => {
         }
 
         setOpen(false);
-    };
+    }; 
 
     const handleSubmit = (e)=>{
         e.preventDefault()
