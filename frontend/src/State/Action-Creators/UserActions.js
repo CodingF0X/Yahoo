@@ -99,6 +99,18 @@ export const updateUserDetails = (id,formData)=> async (dispatch)=>{
     }
 }
 
+export const updateUserPWD = (id,newPassword)=> async (dispatch)=>{
+
+    try{
+
+        const res = await api.updateUserPWD(id,newPassword)
+        dispatch({type:UPDATE_USER_DETAILS,payload:res.data})
+
+    }catch(err){
+        console.log(err)
+    }
+}
+
 export const profilePicture = (id,picture)=> async (dispatch)=>{
 
     try{
