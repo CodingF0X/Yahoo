@@ -9,26 +9,26 @@ import {
   Typography,
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Conversation from "./Conversation";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllChats, getAllMessages, getSingleChat } from "../../../State/Action-Creators/MessengerActions";
 
 const Conversations = () => {
-  const chats = [{
-    _id:1,
-    sender:'Jone Doe',
-    time: '10:56',
-    latestMessage:'laakfmlasflassfalfaksjnkaslflaslflasflaslflashalsdnlasndlansldnsjnfasfjlnlnsaf'
+  const { chats } = useSelector(state=>state.messenger)
+  const dispatch= useDispatch()
+  //const [chatId, setChatId] = useState('')
+  
+  const handleChatClick = (chatId)=>{
+    dispatch(getAllMessages(chatId))
+    // dispatch(getSingleChat(userId))
 
-  },
-  {
-  _id:2,
-  sender:'Jane Doe',
-  time: '09:56',
-  latestMessage:'Lmees lmsaaa'
+  }
 
-}
-]
+  // useEffect(()=>{
+  //   dispatch(getAllChats())
+  // },[dispatch]) 
   return (
     <Box component={Paper} ml="10px" mt="5px" sx={{background:'#f2f2f2'}}>
       {/* <Box
@@ -64,21 +64,21 @@ const Conversations = () => {
           />
         </Box>
 
+        {chats.map(chat=>(
         <Box
           component={Link}
           display={"flex"}
           flexDirection="column"
           gap={1}
           m={1}
-          to={`/chats/`}
+          // to={`/chats/${chat._id}` }
+          key={chat._id}
+          onClick={()=>handleChatClick(chat._id)}
         >
-          {chats.map(chat=>(
-          <Conversation key={chat._id} sender={chat.sender} latestMessage={chat.latestMessage} time={chat.time}/>
-
-          ))}
-
-          
+          <Conversation  members={chat.members} latestMessage={chat.latestMessages} time={chat.createdAt}/>
         </Box>
+        ))}
+
       </Box>
       {/* <Divider  orientation='vertical'  flexItem variant='fullWidth'  sx={{ ml:'250px', height:'500px', maxWidth:'5px'}}/> */}
     </Box>

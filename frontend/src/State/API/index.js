@@ -69,3 +69,10 @@ export const getAllPostsAdmin = ()=> API.get(`api/posts`)
 
 //-- SEARCH METHODS --//
 export const searchFilter = (searchTerm)=> API.post(`/api/filter/search`,{searchTerm})
+
+
+//-- MESSENGER --//
+export const fetchAllChats = ()=> API.get('/api/chat')
+export const fetchAllMessages = (chatId)=> API.get(`/api/chat/message/${chatId}`)
+export const fetchSingleChat = (userId)=> API.get(`/api/chat/${userId}`)
+export const sendMessage = (content,chatId)=> API.post(`/api/chat/message`,{content,chatId})

@@ -25,11 +25,30 @@ import {
 } from "@mui/icons-material";
 
 import Messages from "./Messages";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllChats, sendMessage } from "../../State/Action-Creators/MessengerActions";
+import { useEffect, useRef, useState } from "react";
 
 const ChatBox = ({ sender }) => {
+  const { allMessages } = useSelector(state=>state.messenger)
+  const dispatch = useDispatch()
+  const [message, setMessage] = useState('')
+  const chatId = allMessages[0]?.chatId // here the chat id is the same for all messages in this particular chat
+
+  const scrollRef = useRef()
+  
+  const handleSendMessage = (e)=>{
+    e.preventDefault()
+    allMessages &&  dispatch(sendMessage(message,chatId))
+    dispatch(getAllChats())
+    // scrollRef.current?.scrollIntoView()
+  }
+  useEffect(() => {
+    scrollRef.current && scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [allMessages])
   return (
-    <Box component={Paper} display={"flex"} flexDirection="column"  height='80vh' >
-      <Stack m="10px" overflow='auto' flexGrow={1}>
+    <Box component={Paper} display={"flex"} flexDirection="column"  height='80vh'>
+      <Stack m="10px" overflow='auto'  flexGrow={1} >
         <Toolbar
           sx={{
             color: "#595959",
@@ -72,16 +91,12 @@ const ChatBox = ({ sender }) => {
         <Divider/>
         <br style={{color:'green'}}/>
 
-        <Box display="flex" flexDirection="column" overflow='auto' height='100%' sx={{ flexGrow: 1, overflowY: 'auto' }}>
-          <Messages />
-          <Messages />
-          <Messages />
-          <Messages />
-          <Messages />
-          <Messages />
-          <Messages />
-          <Messages />
-
+        <Box display="flex" flexDirection="column" overflow='auto' height='100%' sx={{ flexGrow: 1, overflowY: 'auto' }} >
+         {allMessages.map(message=>(
+           <Box component='div' key={message._id} ref={scrollRef}>
+          <Messages  message={message}/>
+          </Box>
+          ))}
         </Box>
 
 
@@ -94,8 +109,8 @@ const ChatBox = ({ sender }) => {
           rows={2}
           placeholder="Write Something..."
           fullWidth
-          // value={comment}
-          // onChange={(e) => setComment(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           sx={{
             backgroundColor: "#EAEAEA",
             ml: "10px",
@@ -120,7 +135,7 @@ const ChatBox = ({ sender }) => {
         </IconButton>
 
         
-        <IconButton  sx={{background:'#4d79ff', '&:hover':{background:'violet'}}} type="submit">
+        <IconButton  sx={{background:'#4d79ff', '&:hover':{background:'violet'}}} type="submit" onClick={handleSendMessage}>
           <Send fontSize="large" sx={{color:'white'}}/>
         </IconButton>
       </Box>

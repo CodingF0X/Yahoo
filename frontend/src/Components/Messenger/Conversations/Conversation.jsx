@@ -1,7 +1,8 @@
 import { Avatar, Box, Typography } from "@mui/material";
+import moment from "moment";
 import React from "react";
 
-const Conversation = ({ sender, latestMessage, time }) => {
+const Conversation = ({ members, latestMessage, time }) => {
   return (
     <Box
       display={"flex"}
@@ -18,11 +19,12 @@ const Conversation = ({ sender, latestMessage, time }) => {
 
       <Box ml={2} p={1} borderRadius={2} sx={{ backgroundColor: "#EEEEEE" }}>
         <Box display="flex" justifyContent="space-between" gap={8}>
+          
           <Typography variant="h5" color="blueviolet">
-            {sender}
+            {members[0].firstName + ' ' + members[0].lastName}
           </Typography>
 
-          <Typography>{time}</Typography>
+          <Typography >{moment(time).format('hh:mm A')}</Typography>
         </Box>
 
         <Typography
@@ -41,7 +43,7 @@ const Conversation = ({ sender, latestMessage, time }) => {
             hyphens: "auto",
           }}
         >
-          {latestMessage}
+          {latestMessage.content}
         </Typography>
       </Box>
     </Box>

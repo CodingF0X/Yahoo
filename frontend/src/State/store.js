@@ -6,6 +6,7 @@ import { modeReducer } from './Reducers/ModeReducer'
 import { postsReducer } from './Reducers/PostReducer'
 import { FilterSearch } from './Reducers/SearchReducer'
 import { adminDReducer } from './Reducers/AdminReducer'
+import { messengerReducer } from './Reducers/MessengerReducer'
 
 
 const reducers = combineReducers({
@@ -14,7 +15,8 @@ const reducers = combineReducers({
     posts : postsReducer,
     users: usersReducer,
     admin: adminDReducer,
-    searchResult: FilterSearch
+    searchResult: FilterSearch,
+    messenger:messengerReducer
 })
 
 const userFromStorage = localStorage.getItem('user') ?

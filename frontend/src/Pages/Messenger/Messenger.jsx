@@ -2,6 +2,9 @@ import { Box } from '@mui/material'
 import ChatBox from '../../Components/Messenger/ChatBox'
 import Conversations from '../../Components/Messenger/Conversations/Conversations'
 import RightPane from '../../Components/Messenger/RightPane/RightPane'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllChats } from '../../State/Action-Creators/MessengerActions'
 
 
 const Messenger = () => {
@@ -15,12 +18,18 @@ const Messenger = () => {
   //   }
   // })
 
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(getAllChats())
+  },[])
+
   return (
   
     <Box display={'flex'} flexDirection='row' m={2} maxHeight='100%' sx={{overflowY:'clip'}}>
-      <Box flexBasis='10%'><Conversations/></Box>
+
+      <Box flexBasis='30%'><Conversations/></Box>
       <Box ml={1} flexBasis='50%'><ChatBox sender = 'alex' /></Box>
-      <Box flexBasis='30%'><RightPane/></Box>
+      <Box flexBasis='10%'><RightPane/></Box>
       
     </Box>
     
